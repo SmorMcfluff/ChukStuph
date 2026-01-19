@@ -22,3 +22,7 @@
 ## 2.0.1
 - Added `.meta` files I forgot to generate in 2.0.0
 - Changed the version number to 2.0.1, which accidentally was marked as 1.0.5 in the last release
+## 2.1.0
+- Added a `LayerMask layerToCheck` parameter to `GroundCheck.IsGrounded`
+    - Defaults to the assigned groundLayer, but can be used to 
+    - Example: Use a single GroundCheck component to check for jumpable ground and separately for goomba stomping
