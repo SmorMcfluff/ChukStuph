@@ -1,0 +1,16 @@
+{
+    "name": "com.friendsofchuk.chukstuph",
+    "version": "1.0.0",
+    "displayName": "Chuk Stuph",
+    "description": "A package containing code that has been rewritten many times for game jams, as well as some other goodies",
+    "author":
+    {
+        "name": "Adam Mcfluff",
+        "url": "https://mcfluff.itch.io"
+    },
+    "unity": "6000.2",
+    "dependencies": 
+    {
+        "com.unity.inputsystem": "1.14.2"
+    }
+}
