@@ -102,12 +102,13 @@ namespace ChukStuph.Input
             holdTimer += dt;
             repeatTimer += dt;
 
-            if (holdTimer >= holdThreshold && repeatTimer >= repeatRate)
-            {
-                repeatTimer = 0f;
-                OnHeld?.Invoke();
-                Performed?.Invoke();
-            }
+            if (holdTimer < holdThreshold) return;
+                if (repeatTimer >= repeatRate || holdThreshold == 0f)
+                {
+                    repeatTimer = 0f;
+                    OnHeld?.Invoke();
+                    Performed?.Invoke();
+                }
         }
     }
 }
