@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ChukStuph.Audio
 {
-    [CreateAssetMenu(fileName = "new Texted Audio", menuName = "Chuk Essentials/Audio/Timestamped Texted")]
+    [CreateAssetMenu(fileName = "New Texted Audio", menuName = "Chuk Essentials/Audio/Texted Audio")]
     public class TextedAudioSO : ScriptableObject
     {
         public AudioClip clip;
