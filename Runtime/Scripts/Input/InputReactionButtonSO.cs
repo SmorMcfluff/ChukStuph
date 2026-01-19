@@ -45,6 +45,8 @@ namespace ChukStuph.Input
         protected float holdTimer;
         protected float repeatTimer;
 
+        private bool hasTriggeredHeld;
+
         public override void Enable()
         {
             if (enabled || action == null) return;
@@ -65,6 +67,7 @@ namespace ChukStuph.Input
             action.action.canceled -= OnCanceled;
 
             isHeld = false;
+            hasTriggeredHeld = false;
             holdTimer = 0f;
             repeatTimer = 0f;
         }
@@ -77,6 +80,7 @@ namespace ChukStuph.Input
         {
             holdTimer = 0f;
             repeatTimer = 0f;
+            hasTriggeredHeld = false;
             isHeld = true;
 
             OnPressed?.Invoke();
@@ -90,6 +94,7 @@ namespace ChukStuph.Input
         private void OnCanceled(InputAction.CallbackContext ctx)
         {
             isHeld = false;
+            hasTriggeredHeld = false;
 
             OnReleased?.Invoke();
             Performed?.Invoke();
@@ -102,13 +107,24 @@ namespace ChukStuph.Input
             holdTimer += dt;
             repeatTimer += dt;
 
-            if (holdTimer < holdThreshold) return;
-                if (repeatTimer >= repeatRate || holdThreshold == 0f)
+            if(!hasTriggeredHeld)
+            {
+                if(holdTimer >= holdThreshold)
                 {
+                    hasTriggeredHeld = true;
                     repeatTimer = 0f;
                     OnHeld?.Invoke();
                     Performed?.Invoke();
                 }
+                return;
+            }
+
+            if (repeatTimer >= repeatRate)
+            {
+                repeatTimer = 0f;
+                OnHeld?.Invoke();
+                Performed?.Invoke();
+            }
         }
     }
 }
