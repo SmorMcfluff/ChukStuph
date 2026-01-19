@@ -6,7 +6,7 @@ namespace ChukStuph.Input
 {
     /// <summary>
     /// OnPressed: fired immediately when the button is first pressed.<br />
-    /// OnHeld: fired repeatedly after holdThreshold, every repeatRate seconds while held.<br />
+    /// OnHeld: fired every frame when the button is held
     /// OnReleased: fired once when button is released.<br />
     /// Performed: fired alongside each of the above events for general use.
     /// </summary>
@@ -19,7 +19,7 @@ namespace ChukStuph.Input
         public event Action OnPressed;  //TJ
 
         /// <summary>
-        /// Invoked when input is held (after holdThreshold)
+        /// Invoked when input is held (OnButton)
         /// </summary>
         public event Action OnHeld;     // """"HENRY""""
 
@@ -28,24 +28,9 @@ namespace ChukStuph.Input
         /// </summary>
         public event Action OnReleased; // Yoshi
 
-        /// <summary>
-        /// Invoked whenever input is signaled, regardless of phase (OnButton)
-        /// </summary>
-        public event Action Performed;
-
         public bool IsHeld => isHeld;
 
-        [Tooltip("How long we need to hold the button before repeating")]
-        public float holdThreshold = 0f;
-
-        [Tooltip("How often the signal is repeated")]
-        public float repeatRate = 0.1f;
-
         protected bool isHeld;
-        protected float holdTimer;
-        protected float repeatTimer;
-
-        private bool hasTriggeredHeld;
 
         public override void Enable()
         {
@@ -67,9 +52,6 @@ namespace ChukStuph.Input
             action.action.canceled -= OnCanceled;
 
             isHeld = false;
-            hasTriggeredHeld = false;
-            holdTimer = 0f;
-            repeatTimer = 0f;
         }
 
         /// <summary>
@@ -78,13 +60,8 @@ namespace ChukStuph.Input
         /// <param name="ctx">Information about what triggered the input</param>
         private void OnStarted(InputAction.CallbackContext ctx)
         {
-            holdTimer = 0f;
-            repeatTimer = 0f;
-            hasTriggeredHeld = false;
             isHeld = true;
-
             OnPressed?.Invoke();
-            Performed?.Invoke();
         }
 
         /// <summary>
@@ -94,37 +71,13 @@ namespace ChukStuph.Input
         private void OnCanceled(InputAction.CallbackContext ctx)
         {
             isHeld = false;
-            hasTriggeredHeld = false;
-
             OnReleased?.Invoke();
-            Performed?.Invoke();
         }
 
         public override void Tick(float dt)
         {
             if (!isHeld) return;
-
-            holdTimer += dt;
-            repeatTimer += dt;
-
-            if(!hasTriggeredHeld)
-            {
-                if(holdTimer >= holdThreshold)
-                {
-                    hasTriggeredHeld = true;
-                    repeatTimer = 0f;
-                    OnHeld?.Invoke();
-                    Performed?.Invoke();
-                }
-                return;
-            }
-
-            if (repeatTimer >= repeatRate)
-            {
-                repeatTimer = 0f;
                 OnHeld?.Invoke();
-                Performed?.Invoke();
-            }
         }
     }
 }
