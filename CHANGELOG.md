@@ -26,3 +26,5 @@
 - Added a `LayerMask layerToCheck` parameter to `GroundCheck.IsGrounded`
     - Defaults to the assigned groundLayer, but can be used to 
     - Example: Use a single GroundCheck component to check for jumpable ground and separately for goomba stomping
+## 2.1.1
+- Added a semicolon LUL

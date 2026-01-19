@@ -6,7 +6,7 @@ namespace ChukStuph.Gameplay
     {
         public bool use2D = true;
         public Vector3 boxSize = new(1f, 0.1f, 1f);
-        [SerializeField] private LayerMask groundLayer
+        [SerializeField] private LayerMask groundLayer;
 
         /// <summary>
         /// Checks if the ground is detected within the box.
