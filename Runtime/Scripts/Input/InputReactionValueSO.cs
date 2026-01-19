@@ -11,7 +11,7 @@ namespace ChukStuph.Input
 
         private T lastValue;
         [Header("Deadzone"), Range(0f, 1f)]
-        protected float deadzone = 0.1f;
+        [SerializeField] protected float deadzone = 0.1f;
         protected abstract bool CheckDeadzone(T val);
 
         public override void Enable()
