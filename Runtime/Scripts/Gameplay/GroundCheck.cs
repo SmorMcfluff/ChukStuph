@@ -19,11 +19,11 @@ namespace ChukStuph.Gameplay
             if (use2D)
             {
                 Vector2 size2D = new Vector2(boxSize.x, boxSize.y);
-                return Physics2D.OverlapBox((Vector2)transform.position, size2D, 0f, layerToCheck) != null;
+                return Physics2D.OverlapBox((Vector2)transform.position, size2D, 0f, mask) != null;
             }
             else
             {
-                return Physics.CheckBox(transform.position, boxSize * 0.5f, Quaternion.identity, layerToCheck);
+                return Physics.CheckBox(transform.position, boxSize * 0.5f, Quaternion.identity, mask);
             }
         }
 

@@ -28,3 +28,6 @@
     - Example: Use a single GroundCheck component to check for jumpable ground and separately for goomba stomping
 ## 2.1.1
 - Added a semicolon LUL
+## 2.1.2
+- Fixed an error in `GroundCheck.IsGrounded`
+- I should really test before updating rather than have this package open in a separate window while working on another project, only editing after updating and downloading
