@@ -19,3 +19,6 @@
     - Uses a box check
     - Should be placed on an empty GameObject to control the center position of the box
     - Should be used by calling `GroundCheck.IsGrounded()`
+## 2.0.1
+- Added `.meta` files I forgot to generate in 2.0.0
+- Changed the version number to 2.0.1, which accidentally was marked as 1.0.5 in the last release
