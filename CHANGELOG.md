@@ -31,3 +31,5 @@
 ## 2.1.2
 - Fixed an error in `GroundCheck.IsGrounded`
 - I should really test before updating rather than have this package open in a separate window while working on another project, only editing after updating and downloading
+## 2.1.3
+- Fixed an error in `TimedText` and `TimedTextDrawer`
