@@ -21,7 +21,7 @@ namespace ChukStuph.EditorScripts
             Rect lyricRect = new(position.x + timestampWidth + spacing, position.y, lyricWidth - 2, position.height);
 
             EditorGUI.PropertyField(timestampRect, property.FindPropertyRelative("timestamp"), GUIContent.none);
-            EditorGUI.PropertyField(lyricRect, property.FindPropertyRelative("lyric"), GUIContent.none);
+            EditorGUI.PropertyField(lyricRect, property.FindPropertyRelative("text"), GUIContent.none);
 
             EditorGUI.EndProperty();
         }
