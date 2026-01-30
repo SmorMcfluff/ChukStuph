@@ -4,6 +4,6 @@ namespace ChukStuph.Audio
     public struct TimedText
     {
         public float timestamp;
-        [UnityEngine.Serialization.FormerlySerializedAs("lyric")] public string text;
+        public string text;
     }
 }
