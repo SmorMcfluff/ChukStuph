@@ -32,22 +32,14 @@ namespace ChukStuph.Input
 
         protected bool isHeld;
 
-        public override void Enable()
+        protected override void OnEnableInternal()
         {
-            if (enabled || action == null) return;
-            enabled = true;
-
-            action.action?.Enable();
             action.action.started += OnStarted;
             action.action.canceled += OnCanceled;
         }
 
-        public override void Disable()
+        protected override void OnDisableInternal()
         {
-            if (!enabled || action == null) return;
-            enabled = false;
-
-            action.action?.Disable();
             action.action.started -= OnStarted;
             action.action.canceled -= OnCanceled;
 

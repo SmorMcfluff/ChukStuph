@@ -14,15 +14,8 @@ namespace ChukStuph.Input
         [SerializeField] protected float deadzone = 0.1f;
         protected abstract bool CheckDeadzone(T val);
 
-        public override void Enable()
-        {
-            action.action?.Enable();
-        }
-
-        public override void Disable()
-        {
-            action.action?.Disable();
-        }
+        protected override void OnEnableInternal() { }
+        protected override void OnDisableInternal() { }
 
         /// <summary>
         /// Continuously reads the input value every frame and triggers OnValueChanged if it changed.

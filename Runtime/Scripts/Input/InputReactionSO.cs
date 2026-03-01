@@ -8,19 +8,42 @@ namespace ChukStuph.Input
     /// </summary>
     public abstract class InputReactionSO : ScriptableObject
     {
-        /// <summary>
-        /// The input signal we listen to
-        /// </summary>
         [Header("Input"), Tooltip("The input signal we listen to")]
         public InputActionReference action;
 
         protected bool enabled;
 
-        public abstract void Enable();
-        public abstract void Disable();
+        public void Enable()
+        {
+            if (enabled || action?.action == null) return;
+            enabled = true;
+
+            action.action.performed += OnPerformed;
+            action.action.Enable();
+
+            OnEnableInternal();
+        }
+        public void Disable()
+        {
+            if (!enabled || action?.action == null) return;
+            enabled = false;
+
+            action.action.performed -= OnPerformed;
+            action.action.Disable();
+
+            OnDisableInternal();
+        }
+
+        private void OnPerformed(InputAction.CallbackContext ctx)
+        {
+            LastUsedInput.Device = ctx.control.device;
+        }
+
+        protected abstract void OnEnableInternal();
+        protected abstract void OnDisableInternal();
 
         /// <summary>
-        /// Should be called once per frame, reads the current value of the InputAction.
+        /// Gets called once every frame, reads the current value of the InputAction.
         /// Applies deadzone on float and Vector2-based inputs
         /// For buttons, handles OnPressed, OnHeld, OnReleased and Performed
         /// </summary>

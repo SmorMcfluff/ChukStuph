@@ -33,3 +33,8 @@
 - I should really test before updating rather than have this package open in a separate window while working on another project, only editing after updating and downloading
 ## 2.1.3
 - Fixed an error in `TimedText` and `TimedTextDrawer`
+## 2.2.0
+- Added a `LastUsedInput` class to `ChukStuph.Input` which keeps track of the last used InputDevice.
+    - Fires `OnInputDeviceChanged` when the physical device changes (Keyboard -> XBOX controller -> Dualshock)
+    - Fires `OnControlSchemeChanged` when the logical input scheme changes (Keyboard -> Any Gamepad)
+- Right now we only have explicit support for Keyboard&Mouse and Gamepad
